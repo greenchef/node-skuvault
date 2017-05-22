@@ -8,6 +8,7 @@ import Bluebird from 'bluebird';
 import {name, version} from '../package.json';
 
 // Other Classes
+import Auth from './auth/auth';
 import Brands from './brands/brands';
 import Products from './products/products';
 import Suppliers from './suppliers/suppliers';
@@ -36,6 +37,7 @@ class SkuVault {
 		if ( typeof opts === 'object' ) {
 			_.merge(this[_opts], opts);
 		}
+		this.auth = new Auth(this);
 		this.brands = new Brands(this);
 		this.products = new Products(this);
 		this.suppliers = new Suppliers(this);
@@ -165,6 +167,11 @@ class SkuVault {
 				o[key] = keyOrOptions[key];
 			}
 		}
+	}
+
+	@autobind
+	auth() {
+		return this.auth;
 	}
 
 	@autobind
