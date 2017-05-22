@@ -5,9 +5,11 @@ import debug from 'debug';
 import * as _ from 'lodash';
 import ApiException from './ApiException';
 import Bluebird from 'bluebird';
+import {name, version} from '../package.json';
 
-var {name, version} = require('../package.json'),
-	debugReq = debug('sv:req'),
+import Brands from './brands';
+
+var debugReq = debug('sv:req'),
 	toString = Object.prototype.toString,
 	has = Object.prototype.hasOwnProperty,
 	defaultOptions = Object.assign(Object.create(null), {
@@ -145,7 +147,6 @@ class SkuVault {
 
   @autobind
 	options(keyOrOptions) {
-		// this method does not exist in the fb js sdk
 		var o = this[_opts];
 		if ( !keyOrOptions ) {
 			return o;
@@ -160,6 +161,14 @@ class SkuVault {
 		}
 	}
 
+	@autobind
+	brands() {
+		let brands = new Brands(this);
+		return brands;
+	}
+
 }
 
+export var SV = new SkuVault();
 export default SkuVault;
+export {SkuVault, ApiException};

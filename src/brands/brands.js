@@ -1,14 +1,13 @@
 'use strict';
 import {autobind} from 'core-decorators';
 import * as _ from 'lodash';
-import SkuVault from '../app';
 
 const parseResponse = Symbol('parseResponse');
 
-class Brands extends SkuVault {
+class Brands {
 
-	constructor(opts) {
-		super(opts);
+	constructor(skuvault) {
+		this.skuvault = skuvault;
 	}
 
   @autobind
@@ -18,14 +17,14 @@ class Brands extends SkuVault {
 			filter = args[0];
 			args.splice(0, 1);
 		}
-		return this.api('/products/getBrands', 'post', ...args).then(response => {
+		return this.skuvault.api('/products/getBrands', 'post', ...args).then(response => {
 			return this[parseResponse](filter, response);
 		});
 	}
 
   @autobind
 	create(...args) {
-		return this.api('/products/createBrands', 'post', ...args);
+		return this.skuvault.api('/products/createBrands', 'post', ...args);
 	}
 
 	/**

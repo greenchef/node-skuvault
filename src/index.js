@@ -2,7 +2,7 @@
 /**
  * Simultaneously satisfy require('skuvault') and Babel based ES2015 `import`
  * by exporting an object using Babel's __esModule which contains the normal
- * exports; and bound versions of the methods on FB.
+ * exports;
  */
 var mod = require('./app'),
 	{SkuVault} = mod;

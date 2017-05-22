@@ -3,11 +3,11 @@ import nock from 'nock';
 import {expect} from 'chai';
 import {beforeEach, afterEach, before, describe, it} from 'mocha';
 import {skuvault} from '../../config.json';
-import Brands from './brands';
+import SkuVault from '../app';
 
 nock.disableNetConnect();
 
-var brands = new Brands(skuvault);
+var sv = new SkuVault(skuvault);
 
 beforeEach(() => {
 	nock('https://app.skuvault.com/api')
@@ -37,7 +37,7 @@ afterEach(() => {
 
 describe('Brands.find()', () => {
 	it('should get brands', (done) => {
-		brands.find()
+		sv.brands.find()
 				.then(result => {
 					expect(result).to.have.property('Brands').that.is.a('array');
 					done();
@@ -47,7 +47,7 @@ describe('Brands.find()', () => {
 
 describe('Brands.find({Name: \'Generic\'})', () => {
 	it('should get one brand', (done) => {
-		brands.find({Name: 'Generic'})
+		sv.brands.find({Name: 'Generic'})
 				.then(result => {
 					expect(result[0]).to.have.property('Name', 'Generic');
 					done();
@@ -61,16 +61,15 @@ describe('Brands.create({Brands: [{Name: \'Lincoln\'}]})', () => {
 			.post('/products/createBrands', {})
 			.reply(400, () => {
 				return {Status: 'BadRequest',
-					Errors: [
-						{
-							BrandName: 'Lincoln',
-							ErrorMessages: ['Brand name already exists']
-						}]
+					Errors: [{
+						BrandName: 'Lincoln',
+						ErrorMessages: ['Brand name already exists']
+					}]
 				};
 			});
 	});
 	it('should fail to create a brand that exists', (done) => {
-		brands.create({Brands: [{Name: 'Lincoln'}]})
+		sv.brands.create({Brands: [{Name: 'Lincoln'}]})
 				.catch(error => {
 					expect(error.response).to.have.property('statusCode', 400);
 					done();
