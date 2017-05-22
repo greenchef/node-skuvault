@@ -10,6 +10,7 @@ import {name, version} from '../package.json';
 // Other Classes
 import Brands from './brands/brands';
 import Products from './products/products';
+import Suppliers from './suppliers/suppliers';
 
 var debugReq = debug('sv:req'),
 	toString = Object.prototype.toString,
@@ -37,6 +38,7 @@ class SkuVault {
 		}
 		this.brands = new Brands(this);
 		this.products = new Products(this);
+		this.suppliers = new Suppliers(this);
 	}
 
 /**
@@ -173,6 +175,11 @@ class SkuVault {
 	@autobind
 	products() {
 		return this.products;
+	}
+
+	@autobind
+	suppliers() {
+		return this.suppliers;
 	}
 
 }

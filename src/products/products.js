@@ -61,7 +61,7 @@ class Products {
 	}
 
 	/**
-	 * Add the auth parameter, and fire of a request.
+	 * Parse the response
 	 *
 	 * @access private
 	 * @param filter {String}     the fields to filter on

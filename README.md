@@ -23,7 +23,16 @@ See [config.json](config.json) for config json object
 }
 ```
 
-### Brands Example
+### Authentication
+
+```sh
+var sv = new SkuVault(config);
+sv.auth.login().then(result => {
+  // brands
+});
+```
+
+### Brands
 
 ```sh
 var sv = new SkuVault(config);
@@ -32,11 +41,20 @@ sv.brands.find().then(result => {
 });
 ```
 
-### Products Example
+### Products
 
 ```sh
 var sv = new SkuVault(config);
 sv.products.find().then(result => {
+  // brands
+});
+```
+
+### Suppliers
+
+```sh
+var sv = new SkuVault(config);
+sv.suppliers.find().then(result => {
   // brands
 });
 ```

@@ -4,17 +4,17 @@ import * as _ from 'lodash';
 
 const parseResponse = Symbol('parseResponse');
 
-class Brands {
+class Suppliers {
 
 	constructor(skuvault) {
 		this.skuvault = skuvault;
 	}
 
 	/**
-	 * find brands
+	 * find products
 	 *
 	 * @access public
-	 * @param brand {Object}     the brand to find
+	 * @param product {Object}     the product to find
 	 */
   @autobind
 	find(...args) {
@@ -23,25 +23,25 @@ class Brands {
 			filter = args[0];
 			args.splice(0, 1);
 		}
-		return this.skuvault.api('/products/getBrands', 'post', ...args).then(response => {
+		return this.skuvault.api('/products/getSuppliers', 'post', ...args).then(response => {
 			return this[parseResponse](filter, response);
 		});
 	}
 
 	/**
-	 * Create brands
+	 * Create supplier
 	 *
 	 * @access public
-	 * @param brand {Object}     the brand to create
+	 * @param supplier {Object}     the supplier to create
 	 */
   @autobind
 	create(...args) {
 		if (args[0].length) {
-			args[0] = {Brands: args[0]};
+			args[0] = {Suppliers: args[0]};
 		} else {
-			args[0] = {Brands: [args[0]]};
+			args[0] = {Suppliers: [args[0]]};
 		}
-		return this.skuvault.api('/products/createBrands', 'post', ...args);
+		return this.skuvault.api('/products/createSuppliers', 'post', ...args);
 	}
 
 	/**
@@ -55,8 +55,8 @@ class Brands {
 		if (!filter)
 			return response;
 
-		if (response.Brands && response.Brands.length) {
-			return _.filter(response.Brands, filter);
+		if (response.Suppliers && response.Suppliers.length) {
+			return _.filter(response.Suppliers, filter);
 		}
 
 		return response;
@@ -64,4 +64,4 @@ class Brands {
 
 }
 
-export default Brands;
+export default Suppliers;
