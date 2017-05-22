@@ -7,7 +7,7 @@ import ApiException from './ApiException';
 import Bluebird from 'bluebird';
 import {name, version} from '../package.json';
 
-import Brands from './brands';
+import Brands from './brands/brands';
 
 var debugReq = debug('sv:req'),
 	toString = Object.prototype.toString,
@@ -33,6 +33,7 @@ class SkuVault {
 		if ( typeof opts === 'object' ) {
 			_.merge(this[_opts], opts);
 		}
+		this.brands = new Brands(this);
 	}
 
 /**
@@ -163,8 +164,7 @@ class SkuVault {
 
 	@autobind
 	brands() {
-		let brands = new Brands(this);
-		return brands;
+		return this.brands;
 	}
 
 }
