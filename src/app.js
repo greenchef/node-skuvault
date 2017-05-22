@@ -5,9 +5,13 @@ import debug from 'debug';
 import * as _ from 'lodash';
 import ApiException from './ApiException';
 import Bluebird from 'bluebird';
+import {name, version} from '../package.json';
 
-var {name, version} = require('../package.json'),
-	debugReq = debug('sv:req'),
+// Other Classes
+import Brands from './brands/brands';
+import Products from './products/products';
+
+var debugReq = debug('sv:req'),
 	toString = Object.prototype.toString,
 	has = Object.prototype.hasOwnProperty,
 	defaultOptions = Object.assign(Object.create(null), {
@@ -31,6 +35,8 @@ class SkuVault {
 		if ( typeof opts === 'object' ) {
 			_.merge(this[_opts], opts);
 		}
+		this.brands = new Brands(this);
+		this.products = new Products(this);
 	}
 
 /**
@@ -157,6 +163,16 @@ class SkuVault {
 				o[key] = keyOrOptions[key];
 			}
 		}
+	}
+
+	@autobind
+	brands() {
+		return this.brands;
+	}
+
+	@autobind
+	products() {
+		return this.products;
 	}
 
 }

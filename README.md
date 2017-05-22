@@ -26,8 +26,8 @@ See [config.json](config.json) for config json object
 ### Brands Example
 
 ```sh
-var brands = new Brands(config);
-brands.find().then(result => {
+var sv = new SkuVault(config);
+sv.brands.find().then(result => {
   // brands
 });
 ```
@@ -35,8 +35,8 @@ brands.find().then(result => {
 ### Products Example
 
 ```sh
-var products = new Products(config);
-products.find().then(result => {
+var sv = new SkuVault(config);
+sv.products.find().then(result => {
   // brands
 });
 ```

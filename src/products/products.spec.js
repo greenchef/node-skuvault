@@ -3,11 +3,11 @@ import nock from 'nock';
 import {expect} from 'chai';
 import {beforeEach, afterEach, before, describe, it} from 'mocha';
 import {skuvault} from '../../config.json';
-import Products from './products';
+import SkuVault from '../app';
 
 nock.disableNetConnect();
 
-var products = new Products(skuvault);
+var sv = new SkuVault(skuvault);
 
 beforeEach(() => {
 	nock(skuvault.apiUrl)
@@ -74,7 +74,7 @@ afterEach(() => {
 
 describe('Products.find()', () => {
 	it('should get products', (done) => {
-		products.find()
+		sv.products.find()
 				.then(result => {
 					expect(result).to.have.property('Products').that.is.a('array');
 					done();
@@ -84,7 +84,7 @@ describe('Products.find()', () => {
 
 describe('Products.find({Sku: \'G-OMN-08-00034-Y\'})', () => {
 	it('should find one product', (done) => {
-		products.find({Sku: 'G-OMN-08-00034-Y'})
+		sv.products.find({Sku: 'G-OMN-08-00034-Y'})
 				.then(result => {
 					expect(result[0]).to.have.property('Sku', 'G-OMN-08-00034-Y');
 					done();
@@ -94,7 +94,7 @@ describe('Products.find({Sku: \'G-OMN-08-00034-Y\'})', () => {
 
 describe('Products.find({Sku: \'Hotdog\'})', () => {
 	it('should not find hotdog', (done) => {
-		products.find({Sku: 'Hotdog'})
+		sv.products.find({Sku: 'Hotdog'})
 				.then(result => {
 					expect(result.length, 0);
 					done();
@@ -117,7 +117,7 @@ describe('Products.create({Sku: \'G-OMN-08-00034-Y\'})', () => {
 			});
 	});
 	it('should fail to create a brand that exists', (done) => {
-		products.create({Sku: 'G-OMN-08-00034-Y'})
+		sv.products.create({Sku: 'G-OMN-08-00034-Y'})
 				.catch(error => {
 					expect(error.response).to.have.property('statusCode', 400);
 					done();
