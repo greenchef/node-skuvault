@@ -11,6 +11,12 @@ class Brands extends SkuVault {
 		super(opts);
 	}
 
+	/**
+	 * find brands
+	 *
+	 * @access public
+	 * @param brand {Object}     the brand to find
+	 */
   @autobind
 	find(...args) {
 		var filter;
@@ -23,8 +29,19 @@ class Brands extends SkuVault {
 		});
 	}
 
+	/**
+	 * Create brands
+	 *
+	 * @access public
+	 * @param brand {Object}     the brand to create
+	 */
   @autobind
 	create(...args) {
+		if (args[0].length) {
+			args[0] = {Brands: args[0]};
+		} else {
+			args[0] = {Brands: [args[0]]};
+		}
 		return this.api('/products/createBrands', 'post', ...args);
 	}
 

@@ -1,5 +1,6 @@
 {
   "skuvault" : {
+    "apiUrl": "https://staging.skuvault.com/api",
     "UserToken" : "asdfafd",
     "TenantToken" : "asdfsadf"
   }

@@ -6,18 +6,37 @@
 # setup
 yarn
 # run tests
-DEBUG=sv:req npm test
+DEBUG=sv:req yarn test
 ```
 
 ### SkuVault Config
 
 See [config.json](config.json) for config json object
 
+```json
+{
+  "skuvault" : {
+    "apiUrl": "https://staging.skuvault.com/api",
+    "UserToken" : "asdfafd",
+    "TenantToken" : "asdfsadf"
+  }
+}
+```
+
 ### Brands Example
 
 ```sh
 var brands = new Brands(config);
 brands.find().then(result => {
+  // brands
+});
+```
+
+### Products Example
+
+```sh
+var products = new Products(config);
+products.find().then(result => {
   // brands
 });
 ```

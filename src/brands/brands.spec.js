@@ -10,7 +10,7 @@ nock.disableNetConnect();
 var brands = new Brands(skuvault);
 
 beforeEach(() => {
-	nock('https://app.skuvault.com/api')
+	nock(skuvault.apiUrl)
 		.post('/products/getBrands', {})
 		.reply(200, function() {
 			return {
@@ -46,7 +46,7 @@ describe('Brands.find()', () => {
 });
 
 describe('Brands.find({Name: \'Generic\'})', () => {
-	it('should get one brand', (done) => {
+	it('should find one brand', (done) => {
 		brands.find({Name: 'Generic'})
 				.then(result => {
 					expect(result[0]).to.have.property('Name', 'Generic');
@@ -55,9 +55,19 @@ describe('Brands.find({Name: \'Generic\'})', () => {
 	});
 });
 
-describe('Brands.create({Brands: [{Name: \'Lincoln\'}]})', () => {
+describe('Brands.find({Name: \'NotGeneric\'})', () => {
+	it('should not find brand', (done) => {
+		brands.find({Name: 'NotGeneric'})
+				.then(result => {
+					expect(result.length, 0);
+					done();
+				});
+	});
+});
+
+describe('Brands.create({Name: \'Lincoln\'})', () => {
 	before(() => {
-		nock('https://app.skuvault.com/api')
+		nock(skuvault.apiUrl)
 			.post('/products/createBrands', {})
 			.reply(400, () => {
 				return {Status: 'BadRequest',
@@ -70,7 +80,7 @@ describe('Brands.create({Brands: [{Name: \'Lincoln\'}]})', () => {
 			});
 	});
 	it('should fail to create a brand that exists', (done) => {
-		brands.create({Brands: [{Name: 'Lincoln'}]})
+		brands.create({Name: 'Lincoln'})
 				.catch(error => {
 					expect(error.response).to.have.property('statusCode', 400);
 					done();

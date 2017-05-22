@@ -11,7 +11,7 @@ var {name, version} = require('../package.json'),
 	toString = Object.prototype.toString,
 	has = Object.prototype.hasOwnProperty,
 	defaultOptions = Object.assign(Object.create(null), {
-		apiUrl: 'https://app.skuvault.com/api',
+		apiUrl: 'https://staging.skuvault.com/api',
 		UserToken: null,
 		TenantToken: null,
 		userAgent: `${name}/${version}`
@@ -145,7 +145,6 @@ class SkuVault {
 
   @autobind
 	options(keyOrOptions) {
-		// this method does not exist in the fb js sdk
 		var o = this[_opts];
 		if ( !keyOrOptions ) {
 			return o;
@@ -162,4 +161,6 @@ class SkuVault {
 
 }
 
+export var SV = new SkuVault();
 export default SkuVault;
+export {SkuVault, ApiException};
