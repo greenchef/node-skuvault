@@ -12,7 +12,7 @@ DEBUG=sv:req yarn test
 ```
 
 | Class | Method | Param | SkuVault Endpoint |
-|--- |--- |--- |--- |---
+| --- | --- | --- | --- |
 | auth | login | object | /getTokens |
 | brands | find | object | /products/getBrands |
 | brands | create | object | /products/createBrands |
