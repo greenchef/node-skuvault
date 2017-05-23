@@ -12,6 +12,7 @@ import Auth from './auth/auth';
 import Brands from './brands/brands';
 import Products from './products/products';
 import Suppliers from './suppliers/suppliers';
+import Inventory from './inventory/inventory';
 
 var debugReq = debug('sv:req'),
 	toString = Object.prototype.toString,
@@ -41,6 +42,7 @@ class SkuVault {
 		this.brands = new Brands(this);
 		this.products = new Products(this);
 		this.suppliers = new Suppliers(this);
+		this.inventory = new Inventory(this);
 	}
 
 /**
