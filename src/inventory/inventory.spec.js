@@ -13,10 +13,42 @@ afterEach(() => {
 	nock.cleanAll();
 });
 
+describe('Inventory.find()', () => {
+	beforeEach(() => {
+		nock(skuvault.apiUrl)
+			.post('/inventory/getItemQuantities', {})
+			.reply(200, function() {
+				return {
+					contentType: this.req.headers['content-type'],
+					Items: [
+						{
+							AvailableQuantity: 0,
+							Code: 'INV-Code',
+							HeldQuantity: 0,
+							LastModifiedDateTimeUtc: '0000-00-00T00:00:00.0000000Z',
+							PendingQuantity: 0,
+							PickedQuantity: 0,
+							Sku: 'String',
+							TotalOnHand: 0
+						}
+					]
+
+				};
+			});
+	});
+	it('should get inventory quantities', (done) => {
+		sv.inventory.find({ProductCodes: ['INV-Code']})
+		.then(result => {
+			expect(result).to.have.property('Items').that.is.a('array');
+			done();
+		});
+	});
+});
+
 describe('Inventory.add()', () => {
 	beforeEach(() => {
 		nock(skuvault.apiUrl)
-			.post('/products/addItem', {})
+			.post('/inventory/addItem', {})
 			.reply(200, function() {
 				return {
 					contentType: this.req.headers['content-type'],
@@ -24,7 +56,7 @@ describe('Inventory.add()', () => {
 				};
 			});
 		nock(skuvault.apiUrl)
-			.post('/products/addItemBulk', {})
+			.post('/inventory/addItemBulk', {})
 			.reply(200, function() {
 				return {
 					contentType: this.req.headers['content-type'],
@@ -70,7 +102,7 @@ describe('Inventory.add()', () => {
 describe('Inventory.remove()', () => {
 	beforeEach(() => {
 		nock(skuvault.apiUrl)
-			.post('/products/removeItem', {})
+			.post('/inventory/removeItem', {})
 			.reply(200, function() {
 				return {
 					contentType: this.req.headers['content-type'],
@@ -78,7 +110,7 @@ describe('Inventory.remove()', () => {
 				};
 			});
 		nock(skuvault.apiUrl)
-			.post('/products/removeItemBulk', {})
+			.post('/inventory/removeItemBulk', {})
 			.reply(200, function() {
 				return {
 					contentType: this.req.headers['content-type'],

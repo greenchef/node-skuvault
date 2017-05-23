@@ -11,7 +11,35 @@ yarn
 DEBUG=sv:req yarn test
 ```
 
-### SkuVault Config
+| Class | Method | Param | SkuVault Endpoint |
+|--- |--- |--- |--- |---
+| auth | login | object | /getTokens |
+| brands | find | object | /products/getBrands |
+| brands | create | object | /products/createBrands |
+| suppliers | find | object | /products/getSuppliers |
+| suppliers | create | object | /products/createSuppliers |
+| products | find | object | /products/getProducts |
+| products | create | object | /products/createProduct |
+| products | create | array | /products/createProducts |
+| products | update | object | /products/updateProduct |
+| products | update | array | /products/updateProducts |
+| inventory | find | object | /inventory/getItemQuantities |
+| inventory | add | object | /inventory/addItem |
+| inventory | add | array | /inventory/addItemBulk |
+| inventory | remove | object | /inventory/removeItem |
+| inventory | remove | array | /inventory/removeItemBulk |
+
+## Examples
+
+### Library Usage
+
+```sh
+import SkuVault from 'node-skuvault';
+# or
+var SkuVault = require('node-skuvault');
+
+var sv = new SkuVault(config);
+```
 
 See [config.json](config.json) for config json object
 
@@ -28,7 +56,6 @@ See [config.json](config.json) for config json object
 ### Authentication
 
 ```sh
-var sv = new SkuVault(config);
 sv.auth.login().then(result => {
   // tokens
 });
@@ -40,7 +67,6 @@ sv.auth.login().then(result => {
 var brand = {
       "Name": "String"
     };
-var sv = new SkuVault(config);
 sv.brands.find().then(result => {
   // brands
 });
@@ -53,7 +79,6 @@ sv.brands.create(brand).then(result => {
 ### Products
 
 ```sh
-var sv = new SkuVault(config);
 sv.products.find().then(result => {
   // products
 });
@@ -70,7 +95,6 @@ var supplier = {
       ],
       "Name": "String"
     };
-var sv = new SkuVault(config);
 sv.suppliers.find().then(result => {
   // suppliers
 });
@@ -93,8 +117,7 @@ var product = {
   "UserToken": "String",
   "WarehouseId": 0
 };
-var sv = new SkuVault(config);
-sv.inventory.add().then(result => {
+sv.inventory.add(product).then(result => {
   // result
 });
 ```

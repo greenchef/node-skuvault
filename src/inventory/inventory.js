@@ -8,6 +8,17 @@ class Inventory {
 	}
 
 	/**
+	 * find inventory
+	 *
+	 * @access public
+	 * @param item {Object} Find items
+	 */
+  @autobind
+	find(...args) {
+		return this.skuvault.api('/inventory/getItemQuantities', 'post', ...args);
+	}
+
+	/**
 	 * add inventory
 	 *
 	 * @access public
@@ -15,9 +26,9 @@ class Inventory {
 	 */
   @autobind
 	add(...args) {
-		let endpoint = '/products/addItem';
+		let endpoint = '/inventory/addItem';
 		if (args[0].length) {
-			endpoint = '/products/addItemBulk';
+			endpoint = '/inventory/addItemBulk';
 			args[0] = {Items: args[0]};
 		}
 		return this.skuvault.api(endpoint, 'post', ...args);
@@ -31,9 +42,9 @@ class Inventory {
 	 */
 	@autobind
 	remove(...args) {
-		let endpoint = '/products/removeItem';
+		let endpoint = '/inventory/removeItem';
 		if (args[0].length) {
-			endpoint = '/products/removeItemBulk';
+			endpoint = '/inventory/removeItemBulk';
 			args[0] = {Items: args[0]};
 		}
 		return this.skuvault.api(endpoint, 'post', ...args);
