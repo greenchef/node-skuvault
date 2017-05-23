@@ -116,7 +116,7 @@ describe('Products.create({Sku: \'G-OMN-08-00034-Y\'})', () => {
 				};
 			});
 	});
-	it('should fail to create a brand that exists', (done) => {
+	it('should fail to create a product that exists', (done) => {
 		sv.products.create({Sku: 'G-OMN-08-00034-Y'})
 				.catch(error => {
 					expect(error.response).to.have.property('statusCode', 400);
