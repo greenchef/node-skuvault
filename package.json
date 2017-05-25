@@ -1,5 +1,6 @@
 {
   "name": "node-skuvault",
+  "private": true,
   "version": "1.0.0",
   "description": "Sku Vault API Wrapper",
   "main": "./lib/index.js",
