@@ -1,5 +1,5 @@
 {
-  "name": "gc-node-skuvault",
+  "name": "node-skuvault",
   "version": "1.0.0",
   "description": "Sku Vault API Wrapper",
   "main": "./lib/index.js",
