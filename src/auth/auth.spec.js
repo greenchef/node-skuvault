@@ -3,7 +3,7 @@ import nock from 'nock';
 import {expect} from 'chai';
 import {beforeEach, afterEach, describe, it} from 'mocha';
 import {skuvault} from '../../config.json';
-import SkuVault from '../app';
+import {SkuVault} from '../app';
 
 nock.disableNetConnect();
 

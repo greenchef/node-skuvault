@@ -195,4 +195,4 @@ class SkuVault {
 
 export var SV = new SkuVault();
 export default SkuVault;
-export {SkuVault, ApiException};
+export {SkuVault, ApiException, version};

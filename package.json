@@ -1,13 +1,13 @@
 {
   "name": "@greenchef/node-skuvault",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Sku Vault API Wrapper",
-  "main": "./lib/index.js",
+  "main": "./src/index.js",
   "scripts": {
     "lint": "eslint .",
     "build": "babel src/ -d lib/",
     "buildw": "babel -w src/ -d lib/",
-    "test": "npm run build && ./node_modules/mocha/bin/_mocha -R spec lib/**/*.spec.js --recursive",
+    "test": "npm run build && ./node_modules/mocha/bin/_mocha -R spec src/**/*.spec.js --recursive",
     "prepublish": "npm run build"
   },
   "repository": {

@@ -5,14 +5,14 @@
  * exports;
  */
 var mod = require('./app'),
-	{SkuVault} = mod;
+	{SV} = mod;
 
-for ( let key of Object.getOwnPropertyNames(Object.getPrototypeOf(SkuVault)) ) {
+for ( let key of Object.getOwnPropertyNames(Object.getPrototypeOf(SV)) ) {
 	if ( key === 'constructor' ) continue;
-	if ( typeof SkuVault[key] === 'function' ) {
-		exports[key] = SkuVault[key].bind(SkuVault);
+	if ( typeof SV[key] === 'function' ) {
+		exports[key] = SV[key].bind(SV);
 	} else {
-		exports[key] = SkuVault[key];
+		exports[key] = SV[key];
 	}
 }
 
