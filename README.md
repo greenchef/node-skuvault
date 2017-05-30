@@ -34,10 +34,16 @@ DEBUG=sv:req yarn test
 ### Library Usage
 
 ```sh
-import SkuVault from 'node-skuvault';
-# or
-var SkuVault = require('node-skuvault');
+// ES5
+var SV = require('@greenchef/node-skuvault'),
+    sv = new SV.SkuVault(config);
 
+// ES2015 w/ require()
+var {SkuVault, ApiException} = require('@greenchef/node-skuvault'),
+    sv = new SkuVault(config);
+
+// ES2015 w/ import through Babel
+import {SkuVault, ApiException} from '@greenchef/node-skuvault';
 var sv = new SkuVault(config);
 ```
 
