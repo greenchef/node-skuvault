@@ -2,7 +2,7 @@
   "name": "@greenchef/node-skuvault",
   "version": "1.0.1",
   "description": "Sku Vault API Wrapper",
-  "main": "./src/index.js",
+  "main": "./lib/index.js",
   "scripts": {
     "lint": "eslint .",
     "build": "babel src/ -d lib/",
