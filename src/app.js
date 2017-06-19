@@ -2,6 +2,8 @@
 import {autobind} from 'core-decorators';
 import request from 'request-promise';
 import debug from 'debug';
+import appd from 'appdynamics';
+import winston from 'winston';
 import * as _ from 'lodash';
 import ApiException from './ApiException';
 import Bluebird from 'bluebird';
@@ -21,6 +23,8 @@ var debugReq = debug('sv:req'),
 		apiUrl: 'https://staging.skuvault.com/api',
 		UserToken: null,
 		TenantToken: null,
+		appdProfile: null,
+		log: true,
 		userAgent: `${name}/${version}`
 	}),
 	isValidOption = function(key) {
@@ -43,6 +47,14 @@ class SkuVault {
 		this.products = new Products(this);
 		this.suppliers = new Suppliers(this);
 		this.inventory = new Inventory(this);
+		this.appd = (this.options('appdProfile') && Object.keys(this.options('appdProfile')).length && this.options('appdProfile').accountAccessKey)
+			? appd.profile(this.options('appdProfile'))
+			: null;
+		this.logger = new (winston.Logger)({
+								    transports: [
+								      new (winston.transports.Console)({'timestamp':true})
+								    ]
+								  });
 	}
 
 /**
@@ -143,11 +155,25 @@ class SkuVault {
 
 		debugReq(' %s %j', uri, body);
 
+		if(!!this.options('log'))
+			this.logger.info(`SkuVault: ${JSON.stringify(requestOptions)}`);
+
+		var txn = (this.appd)
+			? this.appd.startTransaction(requestOptions)
+			: null;
+
 		return request(requestOptions)
 						.then(result => {
+							if (txn) {
+								txn.end();
+							}
 							cb(result);
 						})
 						.catch(error => {
+							if (txn) {
+								txn.markError(error);
+								txn.end();
+							}
 							if ( error === Object(error) && error::has('error') ) {
 								cb(error);
 							}
@@ -169,6 +195,9 @@ class SkuVault {
 				o[key] = keyOrOptions[key];
 			}
 		}
+		this.appd = (this.options('appdProfile') && Object.keys(this.options('appdProfile')).length && this.options('appdProfile').accountAccessKey)
+			? appd.profile(this.options('appdProfile'))
+			: null;
 	}
 
 	@autobind

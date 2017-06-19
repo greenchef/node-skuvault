@@ -6,6 +6,10 @@ machine:
   environment:
     PATH: "${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
 dependencies:
+  pre:
+    - yarn remove appdynamics
+    - npm config set user-agent "node/v6.9.1 linux x64"
+    - yarn add appdynamics
   override:
     - yarn
   cache_directories:

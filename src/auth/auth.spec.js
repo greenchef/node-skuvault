@@ -2,15 +2,15 @@
 import nock from 'nock';
 import {expect} from 'chai';
 import {beforeEach, afterEach, describe, it} from 'mocha';
-import {skuvault} from '../../config.json';
 import {SkuVault} from '../app';
+import config from '../../config.json';
 
 nock.disableNetConnect();
 
-var sv = new SkuVault(skuvault);
+var sv = new SkuVault(config);
 
 beforeEach(() => {
-	nock(skuvault.apiUrl)
+	nock(config.apiUrl)
 		.post('/getTokens', {})
 		.reply(200, function() {
 			return {

@@ -1,7 +1,17 @@
 {
-  "skuvault" : {
     "apiUrl": "https://staging.skuvault.com/api",
-    "UserToken" : "asdfafd",
-    "TenantToken" : "asdfsadf"
-  }
+    "UserToken": "asdfafd",
+    "TenantToken": "asdfsadf",
+    "log": true,
+    "appdProfile": {
+      "controllerHostName": "test.saas.appdynamics.com",
+      "controllerPort": 443,
+      "accountName": "Test",
+      "accountAccessKey": "",
+      "applicationName": "",
+      "tierName": "unknown",
+      "nodeName": "node-host",
+      "controllerSslEnabled": true,
+      "excludeAgentFromCallGraph": true
+    }
 }

@@ -2,15 +2,15 @@
 import nock from 'nock';
 import {expect} from 'chai';
 import {beforeEach, afterEach, before, describe, it} from 'mocha';
-import {skuvault} from '../../config.json';
 import {SkuVault} from '../app';
+import config from '../../config.json';
 
 nock.disableNetConnect();
 
-var sv = new SkuVault(skuvault);
+var sv = new SkuVault(config);
 
 beforeEach(() => {
-	nock(skuvault.apiUrl)
+	nock(config.apiUrl)
 		.post('/products/getProducts', {})
 		.reply(200, function() {
 			return {
@@ -104,7 +104,7 @@ describe('Products.find({Sku: \'Hotdog\'})', () => {
 
 describe('Products.create({Sku: \'G-OMN-08-00034-Y\'})', () => {
 	before(() => {
-		nock(skuvault.apiUrl)
+		nock(config.apiUrl)
 			.post('/products/createProduct', {})
 			.reply(400, () => {
 				return {Status: 'BadRequest',
@@ -120,6 +120,23 @@ describe('Products.create({Sku: \'G-OMN-08-00034-Y\'})', () => {
 		sv.products.create({Sku: 'G-OMN-08-00034-Y'})
 				.catch(error => {
 					expect(error.response).to.have.property('statusCode', 400);
+					done();
+				});
+	});
+});
+
+describe('Products.create({Sku: \'G-OMN-08-00034-Y\'})', () => {
+	before(() => {
+		nock(config.apiUrl)
+			.post('/products/createProduct', {})
+			.reply(429, () => {
+				return "429 - {\"Status\":\"Too many requests\",\"Errors\":[]}";
+			});
+	});
+	it('should fail with too many requests', (done) => {
+		sv.products.create({Sku: 'G-OMN-08-00034-Y'})
+				.catch(error => {
+					expect(error.response).to.have.property('statusCode', 429);
 					done();
 				});
 	});

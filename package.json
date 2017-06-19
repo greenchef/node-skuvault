@@ -1,6 +1,6 @@
 {
   "name": "@greenchef/node-skuvault",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Sku Vault API Wrapper",
   "main": "./lib/index.js",
   "scripts": {
@@ -28,12 +28,14 @@
   },
   "homepage": "https://github.com/greenchef/node-skuvault#readme",
   "dependencies": {
+    "appdynamics": "^4.2.15",
     "babel-runtime": "^6.23.0",
     "bluebird": "^3.5.0",
     "core-decorators": "^0.19.0",
     "debug": "^2.6.8",
     "request": "^2.81.0",
-    "request-promise": "^4.2.1"
+    "request-promise": "^4.2.1",
+    "winston": "^2.3.1"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",

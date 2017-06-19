@@ -2,12 +2,12 @@
 import nock from 'nock';
 import {expect} from 'chai';
 import {beforeEach, afterEach, describe, it} from 'mocha';
-import {skuvault} from '../../config.json';
 import {SkuVault} from '../app';
+import config from '../../config.json';
 
 nock.disableNetConnect();
 
-var sv = new SkuVault(skuvault);
+var sv = new SkuVault(config);
 
 afterEach(() => {
 	nock.cleanAll();
@@ -15,7 +15,7 @@ afterEach(() => {
 
 describe('Inventory.find()', () => {
 	beforeEach(() => {
-		nock(skuvault.apiUrl)
+		nock(config.apiUrl)
 			.post('/inventory/getItemQuantities', {})
 			.reply(200, function() {
 				return {
@@ -47,7 +47,7 @@ describe('Inventory.find()', () => {
 
 describe('Inventory.add()', () => {
 	beforeEach(() => {
-		nock(skuvault.apiUrl)
+		nock(config.apiUrl)
 			.post('/inventory/addItem', {})
 			.reply(200, function() {
 				return {
@@ -55,7 +55,7 @@ describe('Inventory.add()', () => {
 					AddItemStatus: 'Success'
 				};
 			});
-		nock(skuvault.apiUrl)
+		nock(config.apiUrl)
 			.post('/inventory/addItemBulk', {})
 			.reply(200, function() {
 				return {
@@ -101,7 +101,7 @@ describe('Inventory.add()', () => {
 
 describe('Inventory.remove()', () => {
 	beforeEach(() => {
-		nock(skuvault.apiUrl)
+		nock(config.apiUrl)
 			.post('/inventory/removeItem', {})
 			.reply(200, function() {
 				return {
@@ -109,7 +109,7 @@ describe('Inventory.remove()', () => {
 					RemoveItemStatus: 'Success'
 				};
 			});
-		nock(skuvault.apiUrl)
+		nock(config.apiUrl)
 			.post('/inventory/removeItemBulk', {})
 			.reply(200, function() {
 				return {

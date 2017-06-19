@@ -62,6 +62,36 @@ anymatch@^1.3.0:
     arrify "^1.0.0"
     micromatch "^2.1.5"
 
+"appdynamics-jre@http://packages.appdynamics.com/nodejs/4.2.15.0/appdynamics-jre.tgz":
+  version "4.2.15"
+  resolved "http://packages.appdynamics.com/nodejs/4.2.15.0/appdynamics-jre.tgz#a9471ed13339889a037bfe88ed2830ce12881874"
+
+"appdynamics-native@http://packages.appdynamics.com/nodejs/4.2.15.0/appdynamics-native.tgz":
+  version "4.2.15"
+  resolved "http://packages.appdynamics.com/nodejs/4.2.15.0/appdynamics-native.tgz#94c3de7447ec97b816839032c2f9a997e5aa40ed"
+
+"appdynamics-protobuf@http://packages.appdynamics.com/nodejs/4.2.15.0/appdynamics-protobuf.tgz":
+  version "0.8.7"
+  resolved "http://packages.appdynamics.com/nodejs/4.2.15.0/appdynamics-protobuf.tgz#144161fc1ffa31a0803dcbcc413555310f9294ad"
+
+"appdynamics-proxy@http://packages.appdynamics.com/nodejs/4.2.15.0/appdynamics-proxy.tgz":
+  version "4.2.15"
+  resolved "http://packages.appdynamics.com/nodejs/4.2.15.0/appdynamics-proxy.tgz#7f96d86455c9daabfb7f2ec245a226b6d941bddc"
+
+"appdynamics-zmq@http://packages.appdynamics.com/nodejs/4.2.15.0/appdynamics-zmq.tgz":
+  version "2.15.3"
+  resolved "http://packages.appdynamics.com/nodejs/4.2.15.0/appdynamics-zmq.tgz#6eb134fa6eaa3e0058df21f23931833fe577bb57"
+
+appdynamics@^4.2.15:
+  version "4.2.15"
+  resolved "https://registry.yarnpkg.com/appdynamics/-/appdynamics-4.2.15.tgz#ac12d35da0230812ac70234b972e6bdcf2887157"
+  dependencies:
+    appdynamics-jre "http://packages.appdynamics.com/nodejs/4.2.15.0/appdynamics-jre.tgz"
+    appdynamics-native "http://packages.appdynamics.com/nodejs/4.2.15.0/appdynamics-native.tgz"
+    appdynamics-protobuf "http://packages.appdynamics.com/nodejs/4.2.15.0/appdynamics-protobuf.tgz"
+    appdynamics-proxy "http://packages.appdynamics.com/nodejs/4.2.15.0/appdynamics-proxy.tgz"
+    appdynamics-zmq "http://packages.appdynamics.com/nodejs/4.2.15.0/appdynamics-zmq.tgz"
+
 aproba@^1.0.3:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/aproba/-/aproba-1.1.1.tgz#95d3600f07710aa0e9298c726ad5ecf2eacbabab"
@@ -130,6 +160,10 @@ async-each@^1.0.0:
 async@1.x, async@^1.4.0:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
+
+async@~1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/async/-/async-1.0.0.tgz#f8fc04ca3a13784ade9e1641af98578cfbd647a9"
 
 asynckit@^0.4.0:
   version "0.4.0"
@@ -955,6 +989,10 @@ code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
 
+colors@1.0.x:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/colors/-/colors-1.0.3.tgz#0433f44d809680fdeb60ed260f1b0c262e82a40b"
+
 combined-stream@^1.0.5, combined-stream@~1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/combined-stream/-/combined-stream-1.0.5.tgz#938370a57b4a51dea2c77c15d5c5fdf895164009"
@@ -1004,6 +1042,10 @@ cryptiles@2.x.x:
   resolved "https://registry.yarnpkg.com/cryptiles/-/cryptiles-2.0.5.tgz#3bdfecdc608147c1c67202fa291e7dca59eaa3b8"
   dependencies:
     boom "2.x.x"
+
+cycle@1.0.x:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/cycle/-/cycle-1.0.3.tgz#21e80b2be8580f98b468f379430662b046c34ad2"
 
 d@1:
   version "1.0.0"
@@ -1294,6 +1336,10 @@ extglob@^0.3.1:
 extsprintf@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.0.2.tgz#e1080e0658e300b06294990cc70e1502235fd550"
+
+eyes@0.1.x:
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/eyes/-/eyes-0.1.8.tgz#62cf120234c683785d902348a800ef3e0cc20bc0"
 
 fast-levenshtein@~2.0.4:
   version "2.0.6"
@@ -1718,7 +1764,7 @@ isobject@^2.0.0:
   dependencies:
     isarray "1.0.0"
 
-isstream@~0.1.2:
+isstream@0.1.x, isstream@~0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
 
@@ -2463,6 +2509,10 @@ sshpk@^1.7.0:
     jsbn "~0.1.0"
     tweetnacl "~0.14.0"
 
+stack-trace@0.0.x:
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/stack-trace/-/stack-trace-0.0.10.tgz#547c70b347e8d32b4e108ea1a2a159e5fdde19c0"
+
 stealthy-require@^1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/stealthy-require/-/stealthy-require-1.1.1.tgz#35b09875b4ff49f26a777e509b3090a3226bf24b"
@@ -2664,6 +2714,17 @@ wide-align@^1.1.0:
 window-size@0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/window-size/-/window-size-0.1.0.tgz#5438cd2ea93b202efa3a19fe8887aee7c94f9c9d"
+
+winston@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/winston/-/winston-2.3.1.tgz#0b48420d978c01804cf0230b648861598225a119"
+  dependencies:
+    async "~1.0.0"
+    colors "1.0.x"
+    cycle "1.0.x"
+    eyes "0.1.x"
+    isstream "0.1.x"
+    stack-trace "0.0.x"
 
 wordwrap@0.0.2:
   version "0.0.2"

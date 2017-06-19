@@ -46,18 +46,33 @@ var {SkuVault, ApiException} = require('@greenchef/node-skuvault'),
 import {SkuVault, ApiException} from '@greenchef/node-skuvault';
 var sv = new SkuVault(config);
 ```
+### Config Options
+
+```sh
+# set on init
+var sv = new SkuVault(config);
+# or set with options
+sv.options(config);
+```
 
 See [config.json](config.json) for config json object
 
 ```json
 {
-  "skuvault" : {
-    "apiUrl": "https://staging.skuvault.com/api",
-    "UserToken" : "asdfafd",
-    "TenantToken" : "asdfsadf"
-  }
+  "apiUrl": "https://staging.skuvault.com/api",
+  "UserToken" : "asdfafd",
+  "TenantToken" : "asdfsadf",
+  "appdProfile": {}  
 }
 ```
+
+| Option | Type | Value | Default |
+| --- | --- | --- | --- |
+| apiUrl | string | Sku Vault API Url | https://staging.skuvault.com/api |
+| UserToken | string | Sku Vault User Token | |
+| TenantToken | string | Sku Vault Tenant Token | |
+| log | boolean | Winston log the API request | true |
+| appdProfile | object | App Dynamics profile object | null |
 
 ### Authentication
 
