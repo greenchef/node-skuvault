@@ -158,11 +158,13 @@ class SkuVault {
 		if(!!this.options('log'))
 			this.logger.info(`SkuVault: ${JSON.stringify(requestOptions)}`);
 
+		var req = request(requestOptions);
+
 		var txn = (this.appd)
-			? this.appd.startTransaction(requestOptions)
+			? this.appd.startTransaction(req)
 			: null;
 
-		return request(requestOptions)
+		return req
 						.then(result => {
 							if (txn) {
 								txn.end();
