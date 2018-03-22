@@ -20,8 +20,7 @@ class Products {
 	find(...args) {
 		var filter;
 		if (args.length && typeof args[0] === 'object') {
-			filter = args[0];
-			args.splice(0, 1);
+			filter = args[0].ProductSKUs;
 		}
 		return this.skuvault.api('/products/getProducts', 'post', ...args).then(response => {
 			return this[parseResponse](filter, response);
@@ -41,6 +40,7 @@ class Products {
 			endpoint = '/products/createProducts';
 			args[0] = {Items: args[0]};
 		}
+		console.log('create ARGS!', ...args);
 		return this.skuvault.api(endpoint, 'post', ...args);
 	}
 
@@ -57,6 +57,7 @@ class Products {
 			endpoint = '/products/updateProducts';
 			args[0] = {Items: args[0]};
 		}
+		console.log('update ARGS!', ...args);
 		return this.skuvault.api(endpoint, 'post', ...args);
 	}
 
@@ -68,14 +69,12 @@ class Products {
 	 * @param response {String}   the response to filter
 	 */
 	[parseResponse](filter, response) {
-		if (!filter)
-			return response;
+		if (!filter) return response;
 
-		if (response.Products && response.Products.length) {
-			return _.filter(response.Products, filter);
-		}
-
-		return response;
+		return _.chain(response.Products)
+			.map('Sku')
+			.filter(gcSku => _.filter(filter, gcSku))
+			.value();
 	}
 
 }
